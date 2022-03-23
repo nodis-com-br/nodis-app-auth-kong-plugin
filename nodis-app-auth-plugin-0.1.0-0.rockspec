@@ -1,7 +1,7 @@
 package = "nodis-app-auth-kong-plugin"
 version = "0.1.0-0"
 source = {
-    url = "https://github.com/nodis-com-br/nodis-app-auth-kong-plugin",
+    url = "git+https://github.com/nodis-com-br/nodis-app-auth-kong-plugin",
     dir = "nodis-app-auth-kong-plugin"
 }
 description = {
