@@ -13,7 +13,7 @@ return {
               type = "record",
               required = true,
               fields = {
-                { host = { type = "string", default = "localhost" } },
+                { host = { type = "string", default = "redis0001.redis.svc.cluster.local" } },
                 { port = { type = "number", default = 6379 } },
                 { connect_timeout = { type = "number", default = 1000 } },
                 { send_timeout = { type = "number", default = 1000 } },
