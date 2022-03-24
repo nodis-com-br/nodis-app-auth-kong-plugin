@@ -22,6 +22,9 @@ build = {
     type = "builtin",
     modules = {
         ["kong.plugins.nodis-app-auth-kong-plugin.handler"] = "kong/plugins/nodis-app-auth-kong-plugin/handler.lua",
+        ["kong.plugins.nodis-app-auth-kong-plugin.RedisPoolManager"] = "kong/plugins/nodis-app-auth-kong-plugin/RedisPoolManager.lua",
         ["kong.plugins.nodis-app-auth-kong-plugin.schema"] = "kong/plugins/nodis-app-auth-kong-plugin/schema.lua",
+        ["kong.plugins.nodis-app-auth-kong-plugin.UsuarioService"] = "kong/plugins/nodis-app-auth-kong-plugin/UsuarioService.lua",
+        ["kong.plugins.nodis-app-auth-kong-plugin.util"] = "kong/plugins/nodis-app-auth-kong-plugin/util.lua"
     }
 }
