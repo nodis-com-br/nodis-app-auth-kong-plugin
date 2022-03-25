@@ -36,6 +36,12 @@ return {
             }
           },
           {
+            header_keycloak_id = {
+              type = "string",
+              default = "X-Nodis-KeycloakId"
+            }
+          },
+          {
             prefix = {
               type = "string",
               default = "Nodis.Acesso_"

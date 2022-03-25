@@ -27,6 +27,7 @@ function NodisAppAuthHandler:access(conf)
 
   local usuario_id = req_get_header(conf.header_usuario_id)
   local loja_id = req_get_header(conf.header_loja_id)
+  local keycloak_id = req_get_header(conf.header_keycloak_id)
 
   if not usuario_id then
     return kong.response.exit(400, {
@@ -44,7 +45,7 @@ function NodisAppAuthHandler:access(conf)
     })
   end
 
-  if is_admin(conf, usuario_id) then
+  if keycloak_id and is_admin(conf, keycloak_id) then
     return
   end
 
@@ -60,7 +61,11 @@ function NodisAppAuthHandler:access(conf)
   end
 
   if not autorizado then
-    return kong.response.exit(403, { message = "Usuário não autorizado" })
+    return kong.response.exit(403, {
+      message = "Usuário não autorizado",
+      conf = conf,
+      headers = req_get_headers()
+    })
   end
 end
 
