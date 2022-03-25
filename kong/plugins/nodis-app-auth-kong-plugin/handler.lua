@@ -2,6 +2,7 @@ local BasePlugin = require "kong.plugins.base_plugin"
 local RedisPoolManager = require "kong.plugins.nodis-app-auth-kong-plugin.RedisPoolManager"
 local UsuarioService = require "kong.plugins.nodis-app-auth-kong-plugin.UsuarioService"
 local req_get_header = kong.request.get_header
+local req_get_headers = kong.request.get_headers
 local table_find = (require "kong.plugins.nodis-app-auth-kong-plugin.util").table_find
 
 local NodisAppAuthHandler = BasePlugin:extend()
@@ -27,8 +28,20 @@ function NodisAppAuthHandler:access(conf)
   local usuario_id = req_get_header(conf.header_usuario_id)
   local loja_id = req_get_header(conf.header_loja_id)
 
-  if not usuario_id or not loja_id then
-    return kong.response.exit(400, { message = "Usuário ou loja não informados" })
+  if not usuario_id then
+    return kong.response.exit(400, {
+      message = "Usuario não informado.",
+      conf = conf,
+      headers = req_get_headers()
+    })
+  end
+
+  if not loja_id then
+    return kong.response.exit(400, {
+      message = "Loja não informada.",
+      conf = conf,
+      headers = req_get_headers()
+    })
   end
 
   if is_admin(conf, usuario_id) then
