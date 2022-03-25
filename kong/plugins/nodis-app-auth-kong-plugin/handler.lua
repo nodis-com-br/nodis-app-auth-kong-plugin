@@ -29,6 +29,10 @@ function NodisAppAuthHandler:access(conf)
   local loja_id = req_get_header(conf.header_loja_id)
   local keycloak_id = req_get_header(conf.header_keycloak_id)
 
+  if keycloak_id and is_admin(conf, keycloak_id) then
+    return
+  end
+
   if not usuario_id then
     return kong.response.exit(400, {
       message = "Usuario não informado.",
@@ -43,10 +47,6 @@ function NodisAppAuthHandler:access(conf)
       conf = conf,
       headers = req_get_headers()
     })
-  end
-
-  if keycloak_id and is_admin(conf, keycloak_id) then
-    return
   end
 
   local redis_pool_manager = RedisPoolManager.new(conf)
