@@ -15,9 +15,9 @@ function _M.table_find(haystack, needle)
 end
 
 
-function _M.table_find_pattern(haystack, needle)
-  for k, v in pairs(haystack) do
-    local isMatching = not (string.find(ngx.var.uri, pattern) == nil)
+function _M.table_find_pattern(haystack, value)
+  for k, pattern in pairs(haystack) do
+    local isMatching = not (string.find(value, pattern) == nil)
     if (isMatching) then return true end
   end
 
