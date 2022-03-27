@@ -42,17 +42,13 @@ function NodisAppAuthHandler:access(conf)
 
   if not usuario_id then
     return kong.response.exit(400, {
-      message = "Usuario não informado.",
-      conf = conf,
-      headers = req_get_headers()
+      message = "Usuario não informado."
     })
   end
 
   if not loja_id then
     return kong.response.exit(400, {
-      message = "Loja não informada.",
-      conf = conf,
-      headers = req_get_headers()
+      message = "Loja não informada."
     })
   end
 
@@ -69,9 +65,7 @@ function NodisAppAuthHandler:access(conf)
 
   if not autorizado then
     return kong.response.exit(403, {
-      message = "Usuário não autorizado",
-      conf = conf,
-      headers = req_get_headers()
+      message = "Usuário não autorizado"
     })
   end
 end
