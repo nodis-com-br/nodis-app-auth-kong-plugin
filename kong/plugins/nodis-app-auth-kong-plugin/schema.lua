@@ -48,6 +48,14 @@ return {
             }
           },
           {
+            routes_filter = {
+              type = "array",
+              elements = {
+                type = "string",
+              },
+            }
+          },
+          {
             admins = {
               type = "set",
               required = true,

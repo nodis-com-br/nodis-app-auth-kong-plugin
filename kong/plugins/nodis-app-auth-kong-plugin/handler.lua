@@ -4,6 +4,7 @@ local UsuarioService = require "kong.plugins.nodis-app-auth-kong-plugin.UsuarioS
 local req_get_header = kong.request.get_header
 local req_get_headers = kong.request.get_headers
 local table_find = (require "kong.plugins.nodis-app-auth-kong-plugin.util").table_find
+local table_find_pattern = (require "kong.plugins.nodis-app-auth-kong-plugin.util").table_find_pattern
 
 local NodisAppAuthHandler = BasePlugin:extend()
 
@@ -24,6 +25,12 @@ end
 
 function NodisAppAuthHandler:access(conf)
   NodisAppAuthHandler.super.access(self, conf)
+
+  local routeMatching = table_find_pattern(conf.routes_filter, ngx.var.uri)
+
+  if routeMatching then
+    return
+  end
 
   local usuario_id = req_get_header(conf.header_usuario_id)
   local loja_id = req_get_header(conf.header_loja_id)
